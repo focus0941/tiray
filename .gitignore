@@ -1,0 +1,19 @@
+# Build artifacts
+*.o
+*.d
+*.elf
+*.zehn
+*.tns
+tracer_base
+tracer_opt
+
+# Output images
+*.ppm
+
+# Data files (we are using Gaussians now anyway)
+*.dat
+*.gz
+
+# OS / IDE cruft
+.DS_Store
+.vscode/

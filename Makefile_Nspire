@@ -1,0 +1,25 @@
+NAME = tiray
+SOURCES = tracer.c
+CFLAGS = -Os -Wall -ffast-math
+LDFLAGS = -lndls -lm
+CFLAGS = -Os -Wall -ffast-math -DNSPIRE -Iheaders
+
+ELF = $(NAME).elf
+ZEHN = $(NAME).zehn
+TNS = $(NAME).tns
+
+all: $(TNS)
+
+tiray.elf: tracer.c headers/materials.h headers/types.h headers/platform.h headers/platform_nspire.h
+
+$(ELF): $(SOURCES)
+	nspire-gcc $(CFLAGS) $^ -o $@ $(LDFLAGS)
+
+$(ZEHN): $(ELF)
+	genzehn --input $< --output $@
+
+$(TNS): $(ZEHN)
+	make-prg $< $@
+
+clean:
+	rm -f $(ELF) $(ZEHN) $(TNS)
